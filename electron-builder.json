@@ -1,0 +1,26 @@
+{
+  "appId": "com.fitlife.visualizer",
+  "productName": "FitLife Visualizer",
+  "directories": {
+    "output": "dist_electron",
+    "buildResources": "public"
+  },
+  "files": [
+    "dist/**/*",
+    "electron/**/*"
+  ],
+  "win": {
+    "target": [
+      "nsis"
+    ],
+    "icon": "public/icon.ico"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true
+  },
+  "extraMetadata": {
+    "main": "electron/main.cjs"
+  }
+} 
