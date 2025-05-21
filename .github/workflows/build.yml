@@ -17,7 +17,7 @@ jobs:
 
       - name: Setup Virtual Display (Xvfb)
         run: |
-          sudo apt-get install -y xvfb
+          sudo apt-get install -y xvfb x11-utils
           Xvfb :99 -screen 0 1024x768x16 &
           export DISPLAY=:99
           sleep 3
@@ -27,7 +27,7 @@ jobs:
         run: |
           sudo dpkg --add-architecture i386
           sudo apt-get update
-          sudo apt-get install -y --install-recommends wine x11-utils
+          sudo apt-get install -y --install-recommends wine
           export WINEARCH=win64
           export WINEPREFIX=~/.wine64
           winecfg -v
