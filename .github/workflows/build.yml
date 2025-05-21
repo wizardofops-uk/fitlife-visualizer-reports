@@ -20,20 +20,29 @@ jobs:
           sudo apt-get install -y xvfb
           Xvfb :99 -screen 0 1024x768x16 &
           export DISPLAY=:99
+          sleep 3
+          xset -display :99 q || { echo "Xvfb failed to start"; exit 1; }
 
       - name: Install Wine
         run: |
           sudo dpkg --add-architecture i386
           sudo apt-get update
-          sudo apt-get install -y wine
+          sudo apt-get install -y --install-recommends wine x11-utils
           export WINEARCH=win64
           export WINEPREFIX=~/.wine64
-          winecfg  # Initializes the 64-bit Wine prefix
+          winecfg -v
+
+      - name: Download rcedit-ia32
+        run: |
+          mkdir -p /home/runner/.cache/electron-builder/winCodeSign/
+          curl -L -o /home/runner/.cache/electron-builder/winCodeSign/rcedit-ia32.exe \
+            https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-ia32.exe
+          ls -l /home/runner/.cache/electron-builder/winCodeSign/
 
       - name: Validate Electron Builder Dependencies
         run: |
           wine --version
-          wine /home/runner/.cache/electron-builder/winCodeSign/winCodeSign-2.6.0/rcedit-ia32.exe --version
+          wine /home/runner/.cache/electron-builder/winCodeSign/rcedit-ia32.exe --version || { echo "Wine or rcedit failed"; exit 1; }
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
