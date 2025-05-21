@@ -15,10 +15,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Wine for multi-platform builds
+      - name: Install Wine (64 bit)
         run: |
           sudo apt-get update
           sudo apt-get install -y wine
+          export WINEARCH=win64
+          export WINEPREFIX=~/.wine64
+          winecfg  # Initializes the 64-bit Wine prefix
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -42,8 +45,14 @@ jobs:
           # Update package.json version
           npm version ${VERSION} --no-git-tag-version
 
-      - name: Build Electron app
-        run: npm run electron:build
+      - name: Vite Build
+        run: npm run build
+
+      - name: Build Electron App x64
+        run: npm run electron:build64
+
+      # - name: Build Electron App x32
+      #   run: npm run electron:build32
 
       - name: Generate Release Notes
         id: release_notes
