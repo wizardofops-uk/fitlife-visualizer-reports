@@ -21,15 +21,13 @@ jobs:
           Xvfb :99 -screen 0 1024x768x16 &
           export DISPLAY=:99
 
-      - name: Install Wine (32-bit and 64-bit)
+      - name: Install Wine
         run: |
           sudo dpkg --add-architecture i386
           sudo apt-get update
-          sudo apt-get install -y wine wine32:i386 libwine:i386 libwine
+          sudo apt-get install -y wine
           export WINEARCH=win64
           export WINEPREFIX=~/.wine64
-          rm -rf ~/.wine64  # Ensure no conflicting configurations exist
-          mkdir -p ~/.wine64
           winecfg  # Initializes the 64-bit Wine prefix
 
       - name: Validate Electron Builder Dependencies
