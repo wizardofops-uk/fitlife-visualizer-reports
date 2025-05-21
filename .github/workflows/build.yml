@@ -15,14 +15,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Virtual Display (Xvfb)
-        run: |
-          sudo apt-get install -y xvfb x11-utils
-          Xvfb :99 -screen 0 1024x768x16 &
-          export DISPLAY=:99
-          sleep 3
-          xset -display :99 q || { echo "Xvfb failed to start"; exit 1; }
-
       - name: Install Wine
         run: |
           sudo dpkg --add-architecture i386
