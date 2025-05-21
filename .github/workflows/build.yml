@@ -15,13 +15,25 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Wine (64 bit)
+      - name: Setup Virtual Display (Xvfb)
         run: |
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1024x768x16 &
+          export DISPLAY=:99
+
+      - name: Install Wine (32-bit and 64-bit)
+        run: |
+          sudo dpkg --add-architecture i386
           sudo apt-get update
-          sudo apt-get install -y wine
+          sudo apt-get install -y wine wine32:i386 libwine:i386 libwine
           export WINEARCH=win64
           export WINEPREFIX=~/.wine64
           winecfg  # Initializes the 64-bit Wine prefix
+
+      - name: Validate Electron Builder Dependencies
+        run: |
+          wine --version
+          wine /home/runner/.cache/electron-builder/winCodeSign/winCodeSign-2.6.0/rcedit-ia32.exe --version
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
