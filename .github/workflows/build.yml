@@ -29,6 +29,7 @@ jobs:
           export WINEARCH=win64
           export WINEPREFIX=~/.wine64
           rm -rf ~/.wine64  # Ensure no conflicting configurations exist
+          mkdir -p ~/.wine64
           winecfg  # Initializes the 64-bit Wine prefix
 
       - name: Validate Electron Builder Dependencies
