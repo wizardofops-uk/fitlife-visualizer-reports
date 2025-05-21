@@ -28,6 +28,7 @@ jobs:
           sudo apt-get install -y wine wine32:i386 libwine:i386 libwine
           export WINEARCH=win64
           export WINEPREFIX=~/.wine64
+          rm -rf ~/.wine64  # Ensure no conflicting configurations exist
           winecfg  # Initializes the 64-bit Wine prefix
 
       - name: Validate Electron Builder Dependencies
