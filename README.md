@@ -1,6 +1,6 @@
 # FitLife Visualizer Reports
 
-## Version: 1.1.0
+## Version: 1.0.0
 
 FitLife Visualizer Reports is a tool for importing, visualizing, and exporting your fitness and nutrition data, with a focus on clear, customizable PDF reports.
 

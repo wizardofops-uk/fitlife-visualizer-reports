@@ -13,6 +13,25 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "build": {
+    "appId": "com.fitlife.visualizer",
+    "productName": "FitLife Visualizer",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ]
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
