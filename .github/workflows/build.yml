@@ -30,7 +30,7 @@ jobs:
           curl -L -o /home/runner/.cache/electron-builder/winCodeSign/rcedit-ia32.exe \
             https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-ia32.exe
           ls -l /home/runner/.cache/electron-builder/winCodeSign/
-          
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
